@@ -1,0 +1,24 @@
+# Lint config for the Python backtest/ingest/live-support code.
+#
+# Deliberately narrow: pyflakes (F) for real errors, E4/E9 for import and syntax
+# problems, and isort (I) so import grouping and ordering are enforced by a tool
+# rather than by the prose rule that used to live in
+# .trellis/spec/backend/quality-guidelines.md. Style rules that would flag
+# hundreds of pre-existing lines are left off on purpose — this config has to pass
+# on the repo as it stands, or it enforces nothing.
+line-length = 110
+target-version = "py313"
+
+[lint]
+select = ["E4", "E9", "F", "I"]
+
+[lint.per-file-ignores]
+# These scripts insert the repo root on sys.path before importing `src`, so their
+# imports genuinely cannot all sit at the top and cannot be freely reordered.
+"study/reversal_btc_hist.py" = ["E402", "I001"]
+"study/reversal_eth_hist.py" = ["E402", "I001"]
+"src/live/tests/gen_parity_fixture.py" = ["E402", "I001"]
+"src/live/tests/gen_portfolio_fixture.py" = ["E402", "I001"]
+
+[lint.isort]
+known-first-party = ["src", "tests", "study"]

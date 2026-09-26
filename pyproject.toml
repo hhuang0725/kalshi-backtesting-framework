@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kalshi-backtesting-framework"
+version = "0.1.0"
+description = "A component-based Python backtesting engine"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numba>=0.60", "numpy>=1.26", "optuna>=3.6", "pandas>=2.0"]
+
+[project.optional-dependencies]
+dev = ["matplotlib>=3.8", "pytest>=8.0", "ruff>=0.6", "scipy>=1.11", "statsmodels>=0.14"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src.backtest*"]
